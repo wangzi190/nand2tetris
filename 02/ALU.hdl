@@ -1,0 +1,37 @@
+// Implementation: the ALU logic manipulates the x and y inputs
+// and operates on the resulting values, as follows:
+// if (zx == 1) set x = 0        // 16-bit constant
+// if (nx == 1) set x = !x       // bitwise not
+// if (zy == 1) set y = 0        // 16-bit constant
+// if (ny == 1) set y = !y       // bitwise not
+// if (f == 1)  set out = x + y  // integer 2's complement addition
+// if (f == 0)  set out = x & y  // bitwise and
+// if (no == 1) set out = !out   // bitwise not
+// if (out == 0) set zr = 1
+// if (out < 0) set ng = 1
+
+CHIP ALU {
+	IN x[16], y[16], zx, nx, zy, ny, f, no;
+	OUT out[16], zr, ng;
+
+	PARTS:
+	Mux16(a=x, b=false, sel=zx, out=opxpre);
+	Not16(in=opxpre, out=notx);
+	Mux16(a=opxpre, b=notx, sel=nx, out=opx);
+
+	Mux16(a=y, b=false, sel=zy, out=opypre);
+	Not16(in=opypre, out=noty);
+	Mux16(a=opypre, b=noty, sel=ny, out=opy);
+
+	And16(a=opx, b=opy, out=and);
+	Add16(a=opx, b=opy, out=add);
+	Mux16(a=and, b=add, sel=f, out=combine);
+
+	Not16(in=combine, out=notcombine);
+	Mux16(a=combine, b=notcombine, sel=no, out=out, out[15]=ng, out[0..7]=czr0, out[8..15]=czr1);
+
+	Or8Way(in=czr0, out=czr0c);
+	Or8Way(in=czr1, out=czr1c);
+	Or(a=czr0c, b=czr1c, out=czr);
+	Not(in=czr, out=zr);
+}

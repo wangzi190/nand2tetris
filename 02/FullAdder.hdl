@@ -1,0 +1,40 @@
+/**
+ * Computes the sum of three bits.
+ */
+
+CHIP FullAdder {
+	IN a, b, c;
+	OUT sum,
+	carry;
+
+	PARTS:
+	Xor(a=a, b=b, out=cr3r5pre);
+	And(a=cr3r5pre, b=c, out=cr3r5);
+
+	Not(in=c, out=notc);
+	And(a=a, b=b, out=cr7pre);
+	And(a=cr7pre, b=notc, out=cr6);
+	And(a=cr7pre, b=c, out=cr7);
+
+	Or(a=cr3r5, b=cr6, out=crpre);
+	Or(a=crpre, b=cr7, out=carry);
+
+	Not(in=a, out=nota);
+	Not(in=b, out=notb);
+
+	And(a=nota, b=notb, out=sr1pre);
+	And(a=sr1pre, b=c, out=sr1);
+	
+	And(a=nota, b=b, out=sr2pre);
+	And(a=sr2pre, b=notc, out=sr2);
+
+	And(a=notb, b=notc, out=sr4pre);
+	And(a=sr4pre, b=a, out=sr4);
+
+	And(a=a, b=b, out=sr7pre);
+	And(a=sr7pre, b=c, out=sr7);
+
+	Or(a=sr1, b=sr2, out=srpre1);
+	Or(a=srpre1, b=sr4, out=srpre2);
+	Or(a=srpre2, b=sr7, out=sum);
+}

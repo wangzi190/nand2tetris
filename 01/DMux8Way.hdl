@@ -1,0 +1,32 @@
+CHIP DMux8Way {
+	IN in, sel[3];
+	OUT a, b, c, d, e, f, g, h;
+
+	PARTS:
+	DMux(in=in, sel=sel[0], a=apre, b=bpre);
+	DMux(in=in, sel=sel[0], a=cpre, b=dpre);
+	DMux(in=in, sel=sel[0], a=epre, b=fpre);
+	DMux(in=in, sel=sel[0], a=gpre, b=hpre);
+
+	Not(in=sel[1], out=notsel1);
+	Not(in=sel[2], out=notsel2);
+
+	Or(a=sel[1], b=sel[2], out=abcheck);
+	Or(a=notsel1, b=sel[2], out=cdcheck);
+	Or(a=sel[1], b=notsel2, out=efcheck);
+	Or(a=notsel1, b=notsel2, out=ghcheck);
+
+	Not(in=abcheck, out=abcheckopp);
+	Not(in=cdcheck, out=cdcheckopp);
+	Not(in=efcheck, out=efcheckopp);
+	Not(in=ghcheck, out=ghcheckopp);
+
+	And(a=abcheckopp, b=apre, out=a);
+	And(a=abcheckopp, b=bpre, out=b);
+	And(a=cdcheckopp, b=cpre, out=c);
+	And(a=cdcheckopp, b=dpre, out=d);
+	And(a=efcheckopp, b=epre, out=e);
+	And(a=efcheckopp, b=fpre, out=f);
+	And(a=ghcheckopp, b=gpre, out=g);
+	And(a=ghcheckopp, b=hpre, out=h);
+}
