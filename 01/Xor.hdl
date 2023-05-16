@@ -4,6 +4,10 @@ CHIP Xor {
 	PARTS:
 	// !((!(!(AB)A))(!(!(AB)B)))
 	
+	And(a=a, b=b, out=lv1);
+	Nand(a=lv1, b=a, out=1lv2);
+	Nand(a=lv1, b=b, out=2lv2);
+	Nand();
 
 	/*Nand(a=a, b=a, out=w1);
 	Nand(a=b, b=b, out=w2);
