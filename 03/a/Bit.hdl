@@ -16,6 +16,6 @@ CHIP Bit {
 
 /*
 	DFF(in=var, out=var);
-	^ out(t) = in(t-1)
+	^ out(t+1) = in(t)
 */
 }

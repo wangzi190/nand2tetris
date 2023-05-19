@@ -89,7 +89,13 @@
 /03/b/RAM512.out
 /03/b/RAM512.tst
 
-04
+/04/fill/Fill.tst
+/04/fill/FillAutomatic.cmp
+/04/fill/FillAutomatic.tst
+
+/04/mult/Mult.cmp
+/04/mult/Mult.tst
+
 05
 06
 07
