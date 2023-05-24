@@ -7,11 +7,13 @@ CHIP Xor {
 	Not(in=b, out=notb);
 	And(a=nota, b=b, out=w1);
 	And(a=a, b=notb, out=w2);
-	Or(a=w1, b=w2, out=out); */
+	Or(a=w1, b=w2, out=out);
+	9 NANDs */
 
 	// SIMPLIFIED TO :
 	Nand(a=a, b=b, out=w1);
 	Nand(a=w1, b=b, out=wb);
 	Nand(a=w1, b=a, out=wa);
 	Nand(a=wa, b=wb, out=out);
+	// 4 NANDs
 }
