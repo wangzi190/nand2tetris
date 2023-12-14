@@ -60,6 +60,7 @@ M=D // Set COUNTER_MAX to (SCREEN + 8192) aka end address of the screen memory m
 
     @CHECK
     D;JLT // If [COUNTER - (SCREEN + 8192)] < 0, jumps back to CHECK which will jump to either FILL or COUNT with the incremented counter value
+    // The program should keep jumping back to CHECK to detect if a key is being held
 
 @SCREEN // Otherwise, resets COUNTER and then jumps back to CHECK
 D=A
