@@ -1,9 +1,8 @@
 // Multiplies R0 and R1 and stores the result in R2.
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
-//
+
 // This program only needs to handle arguments that satisfy
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
-
 
 // Initialize R2 to 0
 @R2
@@ -25,7 +24,7 @@ MD=D // Memory[counter] = Memory[R1]
     M=M-1 // Memory[counter] = Memory[counter] - 1
 
     D=M // D = Memory[counter]
-    // ^ORIGINALLY FORGOT TO LOAD COUNTER INTO D
+    // ^ ORIGINALLY FORGOT TO LOAD COUNTER INTO D
 
     // Terminate program
     @END
@@ -38,7 +37,6 @@ MD=D // Memory[counter] = Memory[R1]
     D=D+M // Memory[R2] = Memory[R2] + Memory[R0]
     @R2
     M=D //<--ORIGINALLY FORGOT TO PUT CALCULATION BACK INTO R2
-    // (BEFORE IT WAS ONLY IN REGISTER D)
 
     // If not terminated, continue adding
     @ADD
