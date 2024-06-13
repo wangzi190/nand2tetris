@@ -50,7 +50,8 @@ CHIP CPU {
 
     Mux16(a=aItself, b=inM, sel=instruction[12], out=aluY);
 
-    DRegister(in=aluOut, load=instruction[4] /* d2 */, out=aluX);
+    And(a=instruction[4] /* d2 */, b=instruction[15] /* i */, out=loadD);
+    DRegister(in=aluOut, load=loadD, out=aluX);
 
     ALU(x=aluX, y=aluY,
         zx=instruction[11],
@@ -67,13 +68,13 @@ CHIP CPU {
 
     And(a=instruction[0], b=check0b, out=jCheck0);
 
-    And(a=instruction[1], b=zr, out=jCheck1); // j2 & aluOut = 0 ?
-    And(a=instruction[2], b=ng, out=jCheck2); // j1 & aluOut < 0 ?
+    And(a=instruction[1], b=zr, out=jCheck1); // j2 & aluOut = 0
+    And(a=instruction[2], b=ng, out=jCheck2); // j1 & aluOut < 0
 
     Or(a=jCheck0, b=jCheck1, out=jCheckBtwn0);
     Or(a=jCheckBtwn0, b=jCheck2, out=jCheckBtwn1);
     And(a=instruction[15], b=jCheckBtwn1, out=jump);
-
+    
     Or16(a=aluOut, b=false, out=outM); // outM = aluOut
     And(a=instruction[15] /* i */, b=instruction[3] /* d3 */, out=writeM); // if it's a C instruction and we want to write to M[A] then writeM = 1
     Or16(a=aItself, b=false, out[0..14]=addressM); // addressM = contents of A reg

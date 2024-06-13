@@ -98,18 +98,25 @@
 
 /05/Add.hack
 /05/ComputerAdd-external.cmp
+/05/ComputerAdd-external.out
 /05/ComputerAdd-external.tst
 /05/ComputerAdd.cmp
+/05/ComputerAdd.out
 /05/ComputerAdd.tst
 /05/ComputerMax-external.cmp
+/05/ComputerMax-external.out
 /05/ComputerMax-external.tst
 /05/ComputerMax.cmp
+/05/ComputerMax.out
 /05/ComputerMax.tst
 /05/ComputerRect-external.cmp
+/05/ComputerRect-external.out
 /05/ComputerRect-external.tst
 /05/ComputerRect.cmp
+/05/ComputerRect.out
 /05/ComputerRect.tst
 /05/CPU-external.cmp
+/05/CPU-external.out
 /05/CPU-external.tst
 /05/CPU.cmp
 /05/CPU.out
