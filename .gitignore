@@ -126,8 +126,15 @@
 /05/Memory.tst
 /05/Memory.out
 /05/Rect.hack
+/06/assembler_wips
+/06/add/Add.asm
+/06/max/Max.asm
+/06/max/MaxL.asm
+/06/pong/Pong.asm
+/06/pong/PongL.asm
+/06/rect/Rect.asm
+/06/rect/RectL.asm
 
-06
 07
 08
 09
