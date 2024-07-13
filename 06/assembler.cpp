@@ -8,10 +8,17 @@ using namespace std;
 string noSpacesOrComments(string); // removes spaces and comments from program line
 bool numerical(string); // checks whether every character in a string is a digit 0-9
 
-int main (void) {
+int main (int argc, char** argv) {
   string instr;
-  ifstream asmFile ("in.asm");
-  ofstream hackFile ("out.hack");
+  
+  string asmFileName = argv[1]; // gets .asm file name from command line argument 1
+  ifstream asmFile (asmFileName);
+
+  string hackFileName = argv[1]; // generates corresponding .hack file
+  if (hackFileName.length() > 4) {
+    hackFileName = hackFileName.substr(0, hackFileName.length() - 4) + ".hack";
+  }
+  ofstream hackFile (hackFileName);
 
   if (asmFile.is_open() && hackFile.is_open()) {
     int line = 0;
@@ -36,7 +43,6 @@ int main (void) {
       {"R10", 10}, {"R11", 11}, {"R12", 12}, {"R13", 13}, {"R14", 14}, {"R15", 15},
       {"SCREEN", 16384}, {"KBD", 24576}
     };
-
     unordered_map<string, string> compBin = {
       {"0", "0101010"}, {"1", "0111111"}, {"-1", "0111010"}, {"D", "0001100"},
       {"A", "0110000"}, {"!D", "0001101"}, {"!A", "0110001"}, {"-D", "0001111"},
@@ -104,7 +110,7 @@ int main (void) {
           if ( !(instr[0] == '(' && instr[instr.length() - 1] == ')') ) {
             // C instruction --> bin
 
-            string dest = "null";
+            string dest = "null"; // initializing instruction fields
             string comp = "";
             string jump = "null";
 
